@@ -1,0 +1,159 @@
+import os
+import pyttsx3 
+
+# global decaration
+run = ['run', 'open', 'display','runn','execute','launch']
+not_ = ['not', 'don\'t', 'close', 'doesn\'t', 'did not', 'do not', 'does not', 'didn\'t', 'dont']
+
+# defining a seperate method for each fuctionality, it will help to debug and implement new ideas
+
+def openChrome(cmd):
+
+	# defining all the possible key word to open the application
+	browser = ['google', 'chrome', 'internet','browser']
+
+	# defining various other possiblilites  
+	chrome_temp = ['chrom', 'chromee','crome', 'chorme', 'chorm', 'gogle', 'goggle', 'googl','googlee']
+
+	if any([x in cmd for x in browser]):
+				os.system('chrome')
+				return True
+	elif any([x in cmd for x in chrome_temp]):
+		print('Do you mean Google Chrome? If Yes press 1 or 0 otherwise.')
+
+		while True:
+			# in case the input type mismatch so handling exception
+			try:
+				take = int(input())
+				if take == 1:
+					os.system('chrome')
+					return True 
+				elif take == 0:
+					return True
+				else:
+					print('Envalid input, try again!')
+			except:
+				print('Envalid input, try again!') 
+	return False
+
+
+def openMediaPlayer(cmd):
+	media = ['media player', 'window','player','music','media', 'player']
+	media_temp = ['meda', 'song','windowmedia','midea','medea','medeia', 'mdeia']
+	if any([x in cmd for x in media]):
+		os.system('wmplayer')
+		return True
+	elif any([x in cmd for x in media_temp]):
+		print('Do you mean Window Media Player? If Yes press 1 or 0 otherwise.')
+		while True:
+				try:
+					take = int(input())
+					if take == 1:
+						os.system('wmplayer')
+						return True
+					elif take == 0:
+						return True
+					else:
+						print('Envalid input, try again!')
+				except: 
+					print('Envalid input, try again!')
+	return False 
+
+def openNotepad(cmd):
+	note = ['notepad', 'write', 'notebook', 'scrapbook', 'writing pad','editor']
+	notepad_temp = ['not pad','notpad', 'nopad','writingpad', 'writing','copy', 'text']
+	if any([x in cmd for x in note]):
+		os.system('notepad')	
+		return True
+	elif any([x in cmd for x in notepad_temp]):
+		print('Do you mean Notepad? If Yes press 1 or 0 otherwise.')
+		while True:
+			try:
+				take = int(input())
+				if take == 1:
+					os.system('notepad')
+					return True
+				elif take == 0:
+					return True
+				else:
+					print('Envalid input, try again!')
+			except:
+				print('Envalid input, try again!')
+	return False
+
+def openTelegram(cmd):
+	socialmedia = ['telegram','social']
+	socialmedia_temp = ['socialmedia', 'telgram', 'telegam', 'tlegram','telegrams','telegrm', 'telegam']
+	if any([x in cmd for x in socialmedia]):
+		os.system('telegram')
+		return True
+	elif any([x in cmd for x in socialmedia_temp]):
+		print('Do you mean Telegram? If Yes press 1 or 0 otherwise.')
+		while True:
+			# exception handling if input given by the user is not of integer type
+			try:
+				take = int(input())
+				if take == 1:
+					os.system('telegram')
+					return True
+				elif take == 0:
+					return True
+				else:
+					print('Envalid Input, try again!')
+			except:
+				print('Envalid Input, try again!')
+	return False
+
+
+def commandExecute(cmd):
+	cmd = cmd.lower()
+	cmd = cmd.split(' ')
+
+	try:
+		# any(iterable) return true if any value in iterable is true 
+		if any([y in cmd for y in run]):
+			if any([y in cmd for y in not_]):
+				print('\n>>>>  Okay! I\'m not doing anything. <<<<\n')
+				return -1
+			
+			# if any of them return True the method will return 1 else 0
+			if openChrome(cmd) or openMediaPlayer(cmd)  or openNotepad(cmd) or openTelegram(cmd):
+				return 1
+			return 0
+	except:
+		print('Some technical issues ouccured.')
+		return -1
+			
+# Application begins from here!
+print()
+
+print(">>>>>       WELCOME TO CHAT BOT!!      <<<<<")
+
+print()
+
+while True:
+	print("Type your command to execute your task: ", end = '')
+	cmd = input()
+	get = commandExecute(cmd)
+	if get == 1:
+		print("Successfully executed! \n")
+	elif get == 0:
+		print('Oh I\'m sorry! I didn\'t get you.')
+	else:
+		pass
+	print("Want to perform taks again? Press '1' or '0' otherwise.")
+
+	# handling exception if type mismatch
+	try:
+		t = int(input())
+		if t == 0:
+			break
+		elif t == 1:
+			pass 	
+		else:
+			print("Envalid input.Try again! '0' or '1' ")
+	except:
+		print("Envalid input.Try again! '0' or '1' ")
+
+			
+        
